@@ -1,111 +1,359 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پونکی آرت‌وود | صنایع دستی چوب</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Noto+Serif:wght@600;700;800&display=swap" rel="stylesheet">
-  :root{
-    --walnut:#241509;
-    --walnut-2:#341d0d;
-    --cream:#F3E6CA;
-    --cream-2:#EAD8B4;
-    --amber:#C1791C;
-    --amber-light:#E0A94C;
-    --copper:#8A4423;
-    --ink:#241708;
-    --ring-line: rgba(243,230,202,0.14);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Vazirmatn',sans-serif;
-    background:var(--cream);
-    color:var(--ink);
-    overflow-x:hidden;
-  }
-  .display{font-family:'Noto Serif',serif; font-weight:800;}
+  .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;}
+  .section-title h2{font-size:1.3rem; font-weight:800;}
+  .section-title .sub{font-size:.82rem; color:var(--gray); margin-top:4px;}
+  .see-all{font-size:.85rem; color:var(--blue); font-weight:700;}
 
-  /* ---------- ambient tree-ring signature (used behind hero + as section dividers) ---------- */
-  .rings{
-    position:absolute; inset:0; pointer-events:none; z-index:0;
-    background:
-      repeating-radial-gradient(circle at 78% 32%,
-        var(--ring-line) 0px, var(--ring-line) 1px,
-        transparent 1px, transparent 14px);
+  /* ---------- category cards ---------- */
+  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .cat-card{
+    background:var(--gray-light); border-radius:14px; padding:20px 14px; text-align:center;
+    border:1px solid transparent; transition:all .2s; cursor:pointer;
   }
+  .cat-card:hover{border-color:var(--blue); background:var(--blue-bg);}
+  .cat-card .cat-img{
+    width:64px; height:64px; margin:0 auto 12px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid var(--border);
+  }
+  .cat-card .cat-img img{width:80%; height:80%; object-fit:contain;}
+  .cat-card span{font-size:.82rem; font-weight:700;}
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(36,21,9,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid rgba(224,169,76,0.25);
+  /* ---------- product grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .card{
+    background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; cursor:pointer;
+    transition:box-shadow .2s, transform .2s; display:flex; flex-direction:column;
   }
-  .nav-wrap{
-    max-width:1180px; margin:0 auto; padding:14px 28px;
-    display:flex; align-items:center; justify-content:space-between;
+  .card:hover{box-shadow:0 12px 30px rgba(20,30,60,0.1); transform:translateY(-3px);}
+  .card-img{height:180px; background:#fbfbfc; display:flex; align-items:center; justify-content:center; padding:14px; position:relative;}
+  .card-img img{max-width:100%; max-height:100%; object-fit:contain;}
+  .badge{
+    position:absolute; top:10px; right:10px; font-size:.68rem; font-weight:800; padding:4px 10px; border-radius:6px; color:#fff;
   }
-  .brand{display:flex; align-items:center; gap:10px;}
-  .brand img{height:42px; width:42px; object-fit:contain;}
-  .brand span{color:var(--cream); font-size:1.25rem; letter-spacing:.5px; font-weight:700;}
-  nav ul{list-style:none; display:flex; gap:30px;}
-  nav a{color:var(--cream-2); text-decoration:none; font-size:.95rem; font-weight:500; transition:color .2s;}
-  nav a:hover{color:var(--amber-light);}
-  .cart-btn{
-    background:var(--amber); color:var(--walnut); border:none; padding:9px 18px;
-    border-radius:30px; font-family:inherit; font-weight:700; font-size:.9rem;
-    cursor:pointer; display:flex; align-items:center; gap:8px; transition:transform .15s, background .2s;
+  .badge.new{background:var(--blue);}
+  .badge.hot{background:var(--red);}
+  .badge.limited{background:var(--amber);}
+  .wish{
+    position:absolute; top:10px; left:10px; width:28px; height:28px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:.85rem; border:1px solid var(--border);
   }
-  .cart-btn:hover{background:var(--amber-light); transform:translateY(-1px);}
-  .cart-count{background:var(--walnut); color:var(--amber-light); border-radius:50%; width:20px; height:20px; font-size:.75rem; display:flex; align-items:center; justify-content:center;}
+  .card-body{padding:14px 14px 16px; border-top:1px solid var(--border); flex:1; display:flex; flex-direction:column;}
+  .card-body h3{font-size:.92rem; font-weight:700; margin-bottom:6px; line-height:1.5;}
+  .card-body .desc{font-size:.78rem; color:var(--gray); line-height:1.7; margin-bottom:12px; flex:1;}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto;}
+  .price{font-size:.85rem; font-weight:800; color:var(--ink);}
+  .add-btn{
+    background:var(--blue-bg); color:var(--blue); border:none; padding:7px 14px; border-radius:8px;
+    font-family:inherit; font-weight:700; font-size:.78rem; cursor:pointer; transition:all .15s;
+  }
+  .add-btn:hover{background:var(--blue); color:#fff;}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative; background:radial-gradient(ellipse at 70% 20%, #402410 0%, var(--walnut) 55%, #150c04 100%);
-    color:var(--cream); padding:90px 28px 70px;
-    overflow:hidden;
+  /* ---------- process ---------- */
+  .process-section{background:var(--gray-light);}
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .step{background:#fff; border:1px solid var(--border); border-radius:14px; padding:22px 18px;}
+  .step .num{
+    width:34px; height:34px; border-radius:9px; background:var(--blue-bg); color:var(--blue);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; margin-bottom:14px;
   }
-  .hero-wrap{
-    max-width:1180px; margin:0 auto; position:relative; z-index:2;
-    display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center;
-  }
-  .eyebrow{
-    display:inline-block; color:var(--amber-light); font-size:.85rem; letter-spacing:2px;
-    border:1px solid rgba(224,169,76,0.4); padding:6px 16px; border-radius:20px; margin-bottom:22px;
-  }
-  .hero h1{
-    font-size:3.4rem; line-height:1.25; margin-bottom:20px; font-weight:700;
-  }
-  .hero h1 em{font-style:normal; color:var(--amber-light);}
-  .hero p{font-size:1.08rem; line-height:2; color:var(--cream-2); max-width:520px; margin-bottom:32px;}
-  .hero-ctas{display:flex; gap:16px;}
-  .btn-primary{
-    background:var(--amber); color:var(--walnut); padding:14px 30px; border-radius:8px;
-    text-decoration:none; font-weight:700; font-size:.98rem; transition:all .2s; border:none; cursor:pointer; font-family:inherit;
-  }
-  .btn-primary:hover{background:var(--amber-light); transform:translateY(-2px);}
-  .btn-ghost{
-    color:var(--cream); border:1px solid rgba(243,230,202,0.35); padding:14px 30px; border-radius:8px;
-    text-decoration:none; font-weight:600; font-size:.98rem; transition:all .2s;
-  }
-  .btn-ghost:hover{border-color:var(--amber-light); color:var(--amber-light);}
+  .step h4{font-size:.95rem; font-weight:700; margin-bottom:8px;}
+  .step p{font-size:.8rem; color:var(--gray); line-height:1.8;}
 
-  .hero-visual{position:relative; display:flex; justify-content:center;}
-  .hero-frame{
-    position:relative; width:100%; max-width:380px; aspect-ratio:1/1.05;
-    border-radius:14px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,0.55);
-    border:1px solid rgba(224,169,76,0.3);
+  /* ---------- gallery ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .gallery-grid figure{
+    border:1px solid var(--border); border-radius:14px; overflow:hidden; background:#fbfbfc;
+    aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; padding:12px;
   }
-  .hero-frame img{width:100%; height:100%; object-fit:cover;}
-  .hero-badge{
-    position:absolute; bottom:-18px; right:-18px; background:var(--amber);
-    color:var(--walnut); padding:14px 20px; border-radius:10px; font-weight:700;
-    box-shadow:0 12px 30px rgba(0,0,0,0.4); font-size:.9rem; line-height:1.5;
-  }
+  .gallery-grid img{max-width:100%; max-height:100%; object-fit:contain;}
 
-  /* ---------- section shells ---------- */
+  /* ---------- care ---------- */
+  .care-wrap{display:grid; grid-template-columns:.8fr 1.2fr; gap:36px; align-items:center;}
+  .care-visual{
+    border:1px solid var(--border); border-radius:16px; overflow:hidden; aspect-ratio:1/1; background:#fbfbfc;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .care-visual img{width:80%; height:80%; object-fit:contain;}
+  .care-list{display:flex; flex-direction:column; gap:14px;}
+  .care-item{display:flex; gap:14px; align-items:flex-start; background:var(--gray-light); border-radius:12px; padding:14px 16px;}
+  .care-icon{
+    width:36px; height:36px; min-width:36px; border-radius:9px; background:var(--blue-bg); color:var(--blue);
+    display:flex; align-items:center; justify-content:center; font-size:1rem;
+  }
+  .care-item h4{font-size:.9rem; font-weight:700; margin-bottom:4px;}
+  .care-item p{font-size:.8rem; color:var(--gray); line-height:1.8;}
+
+  /* ---------- about ---------- */
+  .about-section{background:linear-gradient(120deg, var(--blue-dark), var(--blue)); color:#fff; text-align:center;}
+  .about-section .section-wrap{max-width:760px; margin:0 auto;}
+  .about-section h2{font-size:1.5rem; font-weight:800; margin-bottom:18px;}
+  .about-section p{font-size:.92rem; line-height:2; opacity:.92;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink); color:#c8ccd6; padding:40px 20px 20px;}
+  .foot-wrap{max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:30px; border-bottom:1px solid #333844; padding-bottom:28px; margin-bottom:18px;}
+  .foot-col h5{color:#fff; font-size:.9rem; margin-bottom:14px; font-weight:700;}
+  .foot-col a{display:block; font-size:.82rem; margin-bottom:9px; color:#a5abba;}
+  .foot-col a:hover{color:#fff;}
+  .copyright{max-width:1200px; margin:0 auto; font-size:.78rem; color:#71778a; text-align:center;}
+
+  /* ---------- modal ---------- */
+  .overlay{position:fixed; inset:0; background:rgba(15,20,30,0.55); z-index:100; display:none; align-items:center; justify-content:center; padding:16px;}
+  .overlay.open{display:flex;}
+  .modal{background:#fff; max-width:720px; width:100%; border-radius:16px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; max-height:88vh;}
+  .modal-img{background:var(--gray-light); display:flex; align-items:center; justify-content:center; padding:24px;}
+  .modal-img img{max-width:100%; max-height:320px; object-fit:contain;}
+  .modal-body{padding:30px 28px; position:relative; overflow-y:auto;}
+  .modal-close{position:absolute; top:14px; left:14px; background:var(--gray-light); border:none; width:32px; height:32px; border-radius:50%; font-size:1rem; cursor:pointer;}
+  .modal-body h3{font-size:1.25rem; font-weight:800; margin-bottom:10px;}
+  .modal-body .price{font-size:1.05rem; display:block; margin-bottom:14px;}
+  .modal-body p{color:var(--gray); line-height:1.9; margin-bottom:20px; font-size:.88rem;}
+  .modal-body .add-btn{width:100%; padding:12px; font-size:.9rem; background:var(--blue); color:#fff;}
+  .modal-body .add-btn:hover{background:var(--blue-dark);}
+  .dims{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+  .dims span{background:var(--gray-light); padding:5px 12px; border-radius:20px; font-size:.75rem; font-weight:600;}
+
+  .toast{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(120%);
+    background:var(--ink); color:#fff; padding:13px 24px; border-radius:10px; font-size:.85rem; font-weight:600;
+    z-index:200; transition:transform .35s ease; box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  }
+  .toast.show{transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:900px){
+    .header-wrap{flex-wrap:wrap;}
+    .search-bar{order:3; flex-basis:100%;}
+    .banner-inner{grid-template-columns:1fr;}
+    .banner-img{display:none;}
+    .trust-bar{grid-template-columns:repeat(2,1fr);}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .care-wrap{grid-template-columns:1fr;}
+    .foot-wrap{grid-template-columns:repeat(2,1fr);}
+    .modal{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="top-strip">ارسال به سراسر ایران · ساخت کاملاً دستی از چوب طبیعی</div>
+
+<header>
+  <div class="header-wrap">
+    <div class="brand">
+      <img src="26721.jpg" alt="لوگوی پونکی آرت‌وود">
+      <span>پونکی آرت‌وود</span>
+    </div>
+    <div class="search-bar">
+      🔍<input type="text" placeholder="جستجوی محصول...">
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="toggleCartToast()">
+        🛒 سبد خرید<span class="cart-badge" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <div class="cat-nav-wrap">
+      <a class="cat-chip active" href="#shop">همه محصولات</a>
+      <a class="cat-chip" href="#shop">جعبه و قوطی</a>
+      <a class="cat-chip" href="#shop">زیرسیگاری</a>
+      <a class="cat-chip" href="#shop">جورچین چوبی</a>
+      <a class="cat-chip" href="#process">روند ساخت</a>
+      <a class="cat-chip" href="#care">نگهداری</a>
+      <a class="cat-chip" href="#about">درباره ما</a>
+    </div>
+  </nav>
+</header>
+
+<div class="hero-banner">
+  <div class="banner-inner">
+    <div class="banner-text">
+      <span class="banner-tag">۱۰۰٪ دست‌ساز · چوب طبیعی</span>
+      <h1>هر تکه چوب، یک داستان تمام‌نشده</h1>
+      <p>مجموعه‌ای از جعبه‌ها، زیرسیگاری‌ها و جورچین‌های چوبی که با دست و دقت ساخته شده‌اند.</p>
+      <a href="#shop" class="banner-cta">مشاهده محصولات ←</a>
+    </div>
+    <div class="banner-img">
+      <img src="25570.jpg" alt="جعبه جورچین چوبی دست‌ساز">
+    </div>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">🪵</div>
+    <div><h5>چوب طبیعی</h5><p>مواد اولیه اصیل</p></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">✋</div>
+    <div><h5>ساخت دستی</h5><p>بدون قالب صنعتی</p></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">📦</div>
+    <div><h5>بسته‌بندی ایمن</h5><p>ارسال به سراسر کشور</p></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">💬</div>
+    <div><h5>پشتیبانی مستقیم</h5><p>پاسخ‌گویی سریع</p></div>
+  </div>
+</div>
+
+<section class="section" id="shop">
+  <div class="section-title">
+    <div><h2>محصولات پونکی</h2><div class="sub">مجموعه‌ی کامل محصولات چوبی دست‌ساز</div></div>
+  </div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<section class="process-section section" id="process">
+  <div class="section-title">
+    <div><h2>چگونه ساخته می‌شود</h2><div class="sub">از انتخاب چوب تا پرداخت نهایی</div></div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="num">۱</div><h4>انتخاب چوب</h4><p>تنه‌ها بر اساس رگه و سختی چوب انتخاب می‌شوند.</p></div>
+    <div class="step"><div class="num">۲</div><h4>برش و شکل‌دهی</h4><p>هر قطعه به‌صورت دستی برش و تراش داده می‌شود.</p></div>
+    <div class="step"><div class="num">۳</div><h4>مونتاژ و جزئیات</h4><p>لولا، آستر و قفل‌ها با دست نصب می‌شوند.</p></div>
+    <div class="step"><div class="num">۴</div><h4>پرداخت نهایی</h4><p>سمباده‌کاری و روغن‌کاری، درخشش چوب را نمایان می‌کند.</p></div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="section-title">
+    <div><h2>نگاهی به کارگاه</h2><div class="sub">نمونه‌کارهای پونکی آرت‌وود</div></div>
+  </div>
+  <div class="gallery-grid">
+    <figure><img src="25567.jpg" alt="قوطی چوبی با درپوش گرد"></figure>
+    <figure><img src="25578.jpg" alt="جعبه چوبی با آستر مخملی آبی"></figure>
+    <figure><img src="26558.jpg" alt="جعبه چوبی کلاسیک"></figure>
+    <figure><img src="25559.jpg" alt="ظرف چوبی گردویی"></figure>
+  </div>
+</section>
+
+<section class="section" id="care">
+  <div class="section-title">
+    <div><h2>نگهداری از محصولات چوبی</h2><div class="sub">چند نکته‌ی ساده برای دوام بیشتر</div></div>
+  </div>
+  <div class="care-wrap">
+    <div class="care-visual"><img src="25475.jpg" alt="زیرسیگاری چوبی"></div>
+    <div class="care-list">
+      <div class="care-item"><div class="care-icon">💧</div><div><h4>دور از آب و رطوبت</h4><p>محصول را در معرض آب یا رطوبت زیاد قرار ندهید.</p></div></div>
+      <div class="care-item"><div class="care-icon">☀️</div><div><h4>دور از نور مستقیم و گرما</h4><p>از نور مستقیم خورشید و وسایل گرمایشی دور نگه دارید.</p></div></div>
+      <div class="care-item"><div class="care-icon">🧼</div><div><h4>تمیز کردن ساده</h4><p>با دستمال نرم و خشک یا کمی مرطوب تمیز کنید؛ از مواد شوینده قوی خودداری کنید.</p></div></div>
+      <div class="care-item"><div class="care-icon">✨</div><div><h4>روغن‌کاری دوره‌ای</h4><p>هر چند ماه یک‌بار از روغن مخصوص چوب استفاده کنید.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about-section section" id="about">
+  <div class="section-wrap">
+    <h2>هنر دست، زیبایی ماندگار</h2>
+    <p>پونکی آرت‌وود بر پایه عشق به چوب و خلق محصولاتی ماندگار متولد شده است. هر محصول با دقت، حوصله و توجه به جزئیات ساخته می‌شود تا تجربه‌ای از کیفیت و اصالت هنر ایرانی را به مشتریان هدیه دهد.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-col">
+      <h5>پونکی آرت‌وود</h5>
+      <a href="#shop">محصولات</a>
+      <a href="#process">روند ساخت</a>
+      <a href="#care">نگهداری</a>
+    </div>
+    <div class="foot-col">
+      <h5>دسته‌بندی‌ها</h5>
+      <a href="#shop">جعبه و قوطی</a>
+      <a href="#shop">زیرسیگاری</a>
+      <a href="#shop">جورچین چوبی</a>
+    </div>
+    <div class="foot-col">
+      <h5>درباره ما</h5>
+      <a href="#about">داستان برند</a>
+      <a href="#gallery">کارگاه</a>
+    </div>
+    <div class="foot-col">
+      <h5>ارتباط با ما</h5>
+      <a href="#">اینستاگرام</a>
+      <a href="#">واتس‌اپ</a>
+    </div>
+  </div>
+  <p class="copyright">© تمامی حقوق برای پونکی آرت‌وود محفوظ است.</p>
+</footer>
+
+<div class="overlay" id="overlay"><div class="modal" id="modalContent"></div></div>
+<div class="toast" id="toast">به سبد خرید اضافه شد ✓</div>
+
+<script>
+const products = [
+  {id:1, name:"قوطی چوبی سیگار", tag:"hot", tagLabel:"پرفروش", img:"25567.jpg",
+   desc:"قوطی چوبی با درپوش گرد و لبه رنگی، مناسب نگهداری سیگار یا وسایل کوچک شخصی.",
+   dims:["۱۰ سانتی‌متر ارتفاع","۹ سانتی‌متر طول","۳ سانتی‌متر عرض"], price:"تماس بگیرید"},
+  {id:2, name:"جعبه چوبی آستردار", tag:"new", tagLabel:"جدید", img:"25578.jpg",
+   desc:"جعبه کوچک چوبی با رگه‌های طبیعی تیره و آستر داخلی مخمل آبی.",
+   dims:["طرح رگه چوب طبیعی","آستر مخمل نرم","لولای فلزی"], price:"تماس بگیرید"},
+  {id:3, name:"جعبه چوبی کلاسیک", tag:"", tagLabel:"", img:"26558.jpg",
+   desc:"جعبه چوبی به‌سبک چمدان‌های قدیمی با قفل و لولای فلزی.",
+   dims:["طرح چمدانی","قفل و لولای فلزی","چوب کاج طبیعی"], price:"تماس بگیرید"},
+  {id:4, name:"زیرسیگاری چوبی", tag:"hot", tagLabel:"پرفروش", img:"25475.jpg",
+   desc:"زیرسیگاری چوبی با طراحی ساده، تراش‌خورده از یک تکه چوب یکپارچه.",
+   dims:["طراحی تک‌تکه","مناسب رومیزی","پرداخت روغنی"], price:"تماس بگیرید"},
+  {id:5, name:"ظرف چوبی گردویی", tag:"limited", tagLabel:"محدود", img:"25559.jpg",
+   desc:"ظرف چهارگوش از چوب گردو، مناسب زیرسیگاری، جامدادی یا دکور رومیزی.",
+   dims:["۹ سانتی‌متر طول","۷ سانتی‌متر عرض","۵ سانتی‌متر ارتفاع"], price:"تماس بگیرید"},
+  {id:6, name:"جعبه جورچین چوبی", tag:"new", tagLabel:"جدید", img:"25570.jpg",
+   desc:"جعبه پازل چوبی با درب کشویی مخفی؛ ترکیبی از هنر و سرگرمی.",
+   dims:["مکانیزم کشویی مخفی","ترکیب چند نوع چوب","ساخت کاملاً دستی"], price:"تماس بگیرید"}
+];
+
+const grid = document.getElementById('productGrid');
+grid.innerHTML = products.map(p => `
+  <div class="card" onclick="openModal(${p.id})">
+    <div class="card-img">
+      ${p.tag ? `<span class="badge ${p.tag}">${p.tagLabel}</span>` : ''}
+      <span class="wish">♡</span>
+      <img src="${p.img}" alt="${p.name}">
+    </div>
+    <div class="card-body">
+      <h3>${p.name}</h3>
+      <div class="desc">${p.desc}</div>
+      <div class="card-foot">
+        <span class="price">${p.price}</span>
+        <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">افزودن</button>
+      </div>
+    </div>
+  </div>
+`).join('');
+
+let cartItems = 0;
+function addToCart(){ cartItems++; document.getElementById('cartCount').textContent = cartItems; showToast('به سبد خرید اضافه شد ✓'); }
+function showToast(msg){
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(window._t); window._t = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+function toggleCartToast(){ showToast(cartItems > 0 ? `${cartItems} کالا در سبد شما` : 'سبد خرید خالی است'); }
+function openModal(id){
+  const p = products.find(x=>x.id===id);
+  document.getElementById('modalContent').innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img"><img src="${p.img}" alt="${p.name}"></div>
+    <div class="modal-body">
+      <h3>${p.name}</h3>
+      <span class="price">${p.price}</span>
+      <div class="dims">${p.dims.map(d=>`<span>${d}</span>`).join('')}</div>
+      <p>${p.desc}</p>
+      <button class="add-btn" onclick="addToCart(${p.id}); closeModal();">افزودن به سبد خرید</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>  /* ---------- section shells ---------- */
   section{padding:90px 28px;}
   .section-wrap{max-width:1180px; margin:0 auto;}
   .section-head{text-align:center; margin-bottom:56px;}
